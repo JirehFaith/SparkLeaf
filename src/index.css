@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Core brand colors */
+  --color-primary: #054C7A;     /* deep navy (logo arc/text shadow tone) */
+  --color-secondary: #0ea5e9;   /* bright blue (logo house/water drop) */
+  --color-accent: #84cc16;      /* green (leaf) */
+
+  /* Optional supporting shades */
+  --color-teal: #06b6d4;
+  --color-dark-blue: #1e3a8a;
+}
+@theme {
+  --font-comfortaa: "Poppins", system-ui, sans-serif;
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+}
+@keyframes scroll-right-to-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-rtl {
+  animation: scroll-right-to-left 15s linear infinite;
+}
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+      font-family: var(--font-comfortaa);
+    background: var(--sand);
+    color: var(--ink);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+    color: var(--ink-muted);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    font-family: "Space Grotesk", sans-serif;
+    color: var(--ink);
+}
+
+img,
+svg {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    font: inherit;
+}
