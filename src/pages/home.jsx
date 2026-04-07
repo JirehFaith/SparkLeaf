@@ -1,5 +1,9 @@
+import { FaHome, FaBuilding, FaCouch, FaBroom } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Home, Building2, Sparkles, Sofa } from "lucide-react";
+import { useState } from "react";
+
+
   const steps = [
     {
       number: "1",
@@ -17,40 +21,89 @@ import { Home, Building2, Sparkles, Sofa } from "lucide-react";
       text: "Finalize your booking, we will see you soon!",
     },
   ];
-  const services = [
+  
+
+const houseServices = [
   {
-    icon: Home,
+    icon: FaHome,
     title: "House Cleaning",
-    price: "$89",
+    description: "Professional cleaning for your home spaces.",
   },
   {
-    icon: Building2,
-    title: "Office Cleaning",
-    price: "$120",
-  },
-  {
-    icon: Sparkles,
+    icon: FaBroom,
     title: "Deep Cleaning",
-    price: "$150",
+    description: "Detailed cleaning for every corner.",
   },
   {
-    icon: Sofa,
+    icon: FaCouch,
     title: "Move In/Out Cleaning",
-    price: "$189",
+    description: "Perfect cleaning when moving homes.",
   },
   {
-    icon: Sofa,
-    title: "Carpet & Upholstery Cleaning",
-    price: "$99",
+    icon: FaCouch,
+    title: "Carpet Cleaning",
+    description: "Fresh and clean carpets.",
+  },
+];
+
+const businessServices = [
+  {
+    icon: FaBuilding,
+    title: "Office Cleaning",
+    description: "Clean and productive office spaces.",
   },
   {
-    icon: Sofa,
-    title: "Post-Construction Cleaning",
-    price: "$200",
+    icon: FaBuilding,
+    title: "Commercial Cleaning",
+    description: "Large-scale cleaning services.",
+  },
+  {
+    icon: FaBroom,
+    title: "Maintenance Cleaning",
+    description: "Routine cleaning for businesses.",
+  },
+  {
+    icon: FaBroom,
+    title: "Post Construction",
+    description: "Cleanup after construction.",
   },
 ];
 
 const HomePage = () => {
+  
+  const [type, setType] = useState("house");
+
+  const itemsPerPage = 4;
+
+
+const [startIndex, setStartIndex] = useState(0);
+
+
+
+// choose correct services (house/business)
+const services = type === "house" ? houseServices : businessServices;
+
+// slice visible ones
+const visibleServices = services.slice(startIndex, startIndex + itemsPerPage);
+
+// next
+const handleNext = () => {
+  if (startIndex + itemsPerPage < services.length) {
+    setStartIndex(startIndex + 1);
+  } else {
+    setStartIndex(0); // loop
+  }
+};
+
+// previous
+const handlePrev = () => {
+  if (startIndex > 0) {
+    setStartIndex(startIndex - 1);
+  } else {
+    setStartIndex(services.length - itemsPerPage);
+  }
+};
+
   return (
     <>
       {/* HERO */}
@@ -152,28 +205,105 @@ const HomePage = () => {
     </section>
 {/* services */}
 
-<section id="services" className="py-16">
-  <div>
-    <h1 className="text-center text-3xl font-semibold">Our Services</h1>
+ <section id="services" className=" bg-gray-100/10 py-20 px-6">
+  <div className="max-w-7xl mx-auto">
 
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-10 max-w-6xl mx-auto px-6">
-      {services.map((service, index) => {
-        const Icon = service.icon;
+    {/* TOP HEADER */}
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-14">
 
-        return (
-          <div
-            key={index}
-            className="border border-primary rounded-xl p-6 flex flex-col items-center justify-center text-center space-y-3 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
-          >
-            <Icon className="w-8 h-8 text-primary" />
-            <p className="font-medium">{service.title}</p>
-            <p className="text-sm text-gray-500">
-              Price: from {service.price}
-            </p>
-          </div>
-        );
-      })}
+      {/* Left */}
+      <div>
+        <p className="text-xs tracking-widest text-gray-500 uppercase mb-3">
+          Our Services
+        </p>
+
+        <h2 className="text-4xl md:text-5xl font-semibold text-[#1f2d2b] leading-tight">
+          Perfect cleanliness <br />
+          without effort!
+        </h2>
+      </div>
+
+      {/* Right Toggle */}
+      <div className="mt-6 md:mt-0 flex bg-gray-200 rounded-md p-1 w-fit">
+        <button
+          onClick={() => setType("house")}
+          className={`px-5 py-2 text-sm rounded-md ${
+            type === "house"
+              ? "bg-primary text-white"
+              : "text-gray-600"
+          }`}
+        >
+          House
+        </button>
+
+        <button
+          onClick={() => setType("business")}
+          className={`px-5 py-2 text-sm rounded-md ${
+            type === "business"
+              ? "bg-primary text-white"
+              : "text-gray-600"
+          }`}
+        >
+          Business
+        </button>
+      </div>
     </div>
+
+
+ <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+  {visibleServices.map((service, index)=> {
+    const Icon = service.icon;
+
+    return (
+      <div
+        key={index}
+        className="group p-6 rounded-lg  shadow-sm hover:shadow-lg hover:-translate-y-2   transition-all duration-300"
+      >
+
+        <div className="mb-6">
+          <div className="w-12 h-12 flex items-center justify-center bg-accent/50 rounded-full group-hover:bg-white transition">
+            <Icon className="text-xl text-[#2f4f46]" />
+          </div>
+        </div>
+
+        <h3 className="text-lg font-semibold text-[#1f2d2b] mb-3 group-hover:text-white transition">
+          {service.title}
+        </h3>
+
+        <p className="text-sm text-gray-500 leading-relaxed mb-6 group-hover:text-gray-200 transition">
+          {service.description}
+        </p>
+
+       
+      </div>
+    );
+  })}
+</div>
+
+    {/* BOTTOM NAV */}
+    <div className="flex items-center justify-center mt-16 gap-6">
+
+  {/* PREV */}
+  <button
+    onClick={handlePrev}
+    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 hover:bg-gray-400 transition"
+  >
+    ←
+  </button>
+
+  {/* LINE */}
+  <div className="w-16 h-[2px] bg-gray-400"></div>
+
+  {/* NEXT */}
+  <button
+    onClick={handleNext}
+    className="w-10 h-10 flex items-center justify-center rounded-full bg-yellow-400 hover:bg-yellow-500 transition"
+  >
+    →
+  </button>
+
+</div>
+
   </div>
 </section>
 {/* how it works */}
