@@ -90,6 +90,66 @@ const HomePage = () => {
 
         </div>
       </section>
+    {/* About us */}
+          <section className="bg-white py-16 px-4">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        {/* LEFT IMAGE */}
+        <div className="relative">
+          <img
+            src="./images/transform.jpg"
+            alt="Cleaning"
+            className="rounded-xl w-full  h-[450px] object-cover"
+          />
+
+          {/* FLOATING CIRCLE BADGE */}
+          <div className="absolute -bottom-18 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 bg-white w-36 h-36 rounded-full shadow-lg flex flex-col items-center justify-center text-center">
+            <span className="text-3xl font-bold text-accent">14+</span>
+            <p className="text-xs text-gray-500 mt-1 leading-tight">
+              Years Of <br /> Experience
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-5 mb-24">
+
+      
+          <p className="text-teal-500 text-sm font-medium">
+            About Us
+          </p>
+
+<h2 className="text-3xl md:text-4xl font-bold text-gray-800 leading-snug">
+  SparkLeaf Cleaning <br />
+  Services You Can Trust
+</h2>
+
+
+<div className="border-l-4 border-accent pl-4 text-gray-500 italic text-sm">
+  "At SparkLeaf, we believe every space deserves to feel fresh, healthy, and welcoming."
+</div>
+
+
+<p className="text-gray-500 text-sm leading-relaxed">
+  SparkLeaf delivers reliable and professional cleaning services tailored for homes and businesses. 
+  With attention to detail and a commitment to quality, we ensure every space is left spotless, 
+  giving you peace of mind and more time to focus on what matters most.
+</p>
+
+        
+          <div className="flex items-center flex-wrap gap-4 pt-2">
+            <button className="bg-primary hover:bg-teal-600 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow">
+              View Our Services
+            </button>
+
+            <span className="text-gray-600 text-sm">
+              or Call <span className="font-semibold text-gray-800">+250 794 381 611</span>
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 {/* services */}
 
 <section id="services" className="py-16">

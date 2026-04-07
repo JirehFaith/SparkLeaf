@@ -35,6 +35,11 @@ const Navbar = () => {
     </a>
   </li>
   <li>
+    <a href="#about" className="hover:text-white cursor-pointer transition">
+      About
+    </a>
+  </li>
+  <li>
     <a href="#services" className="hover:text-white cursor-pointer transition">
       Services
     </a>
@@ -47,11 +52,6 @@ const Navbar = () => {
   <li>
     <a href="#blog" className="hover:text-white cursor-pointer transition">
       Blog
-    </a>
-  </li>
-  <li>
-    <a href="#about" className="hover:text-white cursor-pointer transition">
-      About
     </a>
   </li>
   <li>
