@@ -3,11 +3,11 @@ import { MdEmail, MdPhone } from "react-icons/md";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-primary/30 mt-32 pt-28">
+    <footer className="relative bg-gray-100 mt-32 pt-28">
       
       {/* Newsletter */}
       <div className="absolute top-0 left-0 w-full flex justify-center -translate-y-1/2 z-20 px-4">
-        <div className="w-full max-w-6xl bg-primary text-white/80 rounded-2xl shadow-xl p-6 md:p-10">
+        <div className="w-full max-w-6xl bg-primary text-white/90 rounded-2xl shadow-xl p-6 md:p-10">
           
           <div className="max-w-2xl">
             <h2 className="text-lg md:text-2xl font-semibold mb-2">
@@ -109,22 +109,34 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 className="font-semibold mb-4 text-gray-800">Contact Us</h4>
+  <h4 className="font-semibold mb-4 text-gray-800">Contact Us</h4>
 
-          <div className="flex items-center gap-3 text-sm text-gray-600 p-3 rounded-lg mb-3">
-            <MdPhone className="text-primary" />
-            <span className="break-words">+250 794381611</span>
-          </div>
+  {/* PHONE */}
+  <div className="flex items-center  text-sm text-gray-600 p-3 rounded-lg ">
+    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+      <MdPhone className="text-primary w-5 h-5" />
+    </div>
 
-          <div className="flex items-center gap-3 text-sm text-gray-600 p-3 rounded-lg">
-            <MdEmail className="text-primary" />
-            <span className="break-words">sparkLeaf@mail.com</span>
-          </div>
-        </div>
+    <span className="text-sm font-medium text-gray-800 leading-tight">
+      +250 794381611
+    </span>
+  </div>
+
+  {/* EMAIL */}
+  <div className="flex items-center gap-3 text-sm text-gray-600 p-3 rounded-lg">
+    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+      <MdEmail className="text-primary w-5 h-5" />
+    </div>
+
+    <span className="text-sm font-medium text-gray-800 break-words leading-tight">
+      sparkLeaf@mail.com
+    </span>
+  </div>
+</div>
       </div>
 
       {/* Bottom */}
-      <div className="bg-primary/20 p-6 border-t border-primary/30">
+      <div className=" p-6 border-t border-primary/30">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center text-sm text-gray-600 gap-4">
           
           <p className="text-black text-center md:text-left">

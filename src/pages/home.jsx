@@ -350,6 +350,117 @@ const handlePrev = () => {
         </div>
       </div>
     </section>
+    {/* contacts */}
+   <section id="contact"className=" py-20 px-6">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+        {/* LEFT SIDE */}
+        <div>
+          <h2 className="text-5xl font-semibold text-black leading-tight mb-6">
+            Get in — <br />
+            touch with us
+          </h2>
+
+          <p className="text-gray-600 mb-8 max-w-md leading-relaxed">
+            We’re here to help! Whether you have a question about our services,
+            need assistance with your account, or want to provide feedback, our
+            team is ready to assist you.
+          </p>
+
+          {/* Email */}
+          <div className="mb-4">
+            <p className="text-gray-500 text-sm">Email:</p>
+            <p className="text-lg font-medium text-black">
+              sparkleaf@gmail.com
+            </p>
+          </div>
+
+          {/* Phone */}
+          <div className="mb-6">
+            <p className="text-gray-500 text-sm">Phone:</p>
+            <p className="text-lg font-medium text-black">
+              +250 794 381 611
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              Available Monday to Friday, 9 AM - 6 PM GMT
+            </p>
+          </div>
+
+          {/* Button */}
+          <button className="flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full shadow hover:opacity-90 transition">
+            Live Chat
+            <span className="w-6 h-6 flex items-center justify-center bg-white text-black rounded-full">
+              →
+            </span>
+          </button>
+        </div>
+
+        {/* RIGHT SIDE (FORM) */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm">
+
+          <form className="space-y-6">
+
+            {/* Name Row */}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-sm text-gray-600">First Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter your first name..."
+                  className="w-full mt-2 px-4 py-3 rounded-full border border-gray-200 outline-none focus:ring-2 focus:ring-black"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm text-gray-600">Last Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter your last name..."
+                  className="w-full mt-2 px-4 py-3 rounded-full border border-gray-200 outline-none focus:ring-2 focus:ring-black"
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="text-sm text-gray-600">Email</label>
+              <input
+                type="email"
+                placeholder="Enter your email address..."
+                className="w-full mt-2 px-4 py-3 rounded-full border border-gray-200 outline-none focus:ring-2 focus:ring-black"
+              />
+            </div>
+
+            {/* Message */}
+            <div>
+              <label className="text-sm text-gray-600">
+                How can we help you?
+              </label>
+              <textarea
+                rows="5"
+                placeholder="Enter your message..."
+                className="w-full mt-2 px-4 py-3 rounded-2xl border border-gray-200 outline-none focus:ring-2 focus:ring-black resize-none"
+              ></textarea>
+            </div>
+
+            {/* Submit */}
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                className="flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full shadow hover:opacity-90 transition"
+              >
+                Send Message
+                <span className="w-6 h-6 flex items-center justify-center bg-white text-black rounded-full">
+                  →
+                </span>
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </section>
     </>
   );
 };
