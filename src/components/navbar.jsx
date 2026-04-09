@@ -2,9 +2,10 @@ import { useState } from "react";
 
 
 const Navbar = () => {
+  const [language, setLanguage]= useState("EN")
     
   return (
-    <nav className="bg-white text-white px-6 ">
+    <nav className=" fixed top-0 left-0 w-full z-50  bg-white text-white px-6 ">
       
       {/* Container */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
@@ -45,15 +46,16 @@ const Navbar = () => {
     </a>
   </li>
   <li>
+    <a href="#pricing" className="hover:text-white cursor-pointer transition">
+      Pricing
+    </a>
+  </li>
+  <li>
     <a href="#how-it-works" className="hover:text-white cursor-pointer transition">
       How it works
     </a>
   </li>
-  <li>
-    <a href="#blog" className="hover:text-white cursor-pointer transition">
-      Blog
-    </a>
-  </li>
+
   <li>
     <a href="#contact" className="hover:text-white cursor-pointer transition">
       Contacts
@@ -70,19 +72,40 @@ const Navbar = () => {
             <option className="text-black">Kigali</option>
             <option className="text-black">Paris</option>
             <option className="text-black">Dubai</option>
+            <option className="text-black">London</option>
+            <option className="text-black">Toronto</option>
+            <option className="text-black">New York</option>
           </select>
 
-          {/* Language Toggle */}
-          <div className="flex items-center  text-primary border border-secondary rounded overflow-hidden text-sm">
-            <button className="px-3 py-2 bg-secondary text-white">EN</button>
-            <button className="px-3 py-2 hover:bg-secondary hover:text-white transition">
-              FR
-            </button>
-          </div>
+      <div className="flex items-center text-primary border border-secondary rounded overflow-hidden text-sm">
+  {/* language toggle */}
+  <button
+    onClick={() => setLanguage("EN")}
+    className={`px-3 py-2 transition ${
+      language === "EN"
+        ? "bg-secondary text-white"
+        : "hover:bg-secondary hover:text-white"
+    }`}
+  >
+    EN
+  </button>
+
+  <button
+    onClick={() => setLanguage("FR")}
+    className={`px-3 py-2 transition ${
+      language === "FR"
+        ? "bg-secondary text-white"
+        : "hover:bg-secondary hover:text-white"
+    }`}
+  >
+    FR
+  </button>
+
+</div>
 
           {/* CTA Button */}
           <button className="bg-secondary hover:opacity-90 text-white px-5 py-2 rounded-lg font-medium transition whitespace-nowrap">
-            Book Now
+          <a href="/login">Book now</a>
           </button>
         </div>
       </div>

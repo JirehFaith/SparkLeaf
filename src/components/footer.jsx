@@ -62,17 +62,17 @@ export default function Footer() {
           </p>
 
           <div className="flex gap-3 text-lg flex-wrap">
-            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary hover:text-white transition">
-              <FaInstagram className="text-pink-700" />
+            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary  transition">
+              <FaInstagram className="text-white" />
             </a>
-            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary hover:text-white transition">
-              <FaFacebook className="text-blue-600" />
+            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary  transition">
+              <FaFacebook className="text-white" />
             </a>
-            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary hover:text-white transition">
+            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary  transition">
               <MdEmail className="text-white" />
             </a>
-            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary hover:text-white transition">
-              <FaTwitter className="text-blue-600" />
+            <a href="#" className="p-2 rounded-full bg-primary hover:bg-secondary  transition">
+              <FaTwitter className="text-white" />
             </a>
           </div>
         </div>
