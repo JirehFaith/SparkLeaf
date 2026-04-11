@@ -17,7 +17,7 @@ export default function Footer() {
             <p className="mb-4 text-sm opacity-90">
               Get 20% off on your first order just by subscribing to our newsletter
             </p>
-
+    
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
               <input
                 type="email"
