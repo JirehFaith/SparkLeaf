@@ -5,6 +5,7 @@ import Navbar from './components/navbar'
 import Footer from './components/footer'
 import Home from './pages/home'
 import Login from "./pages/login"
+import Booking from "./pages/book"
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/booking" element={<Booking />} />
           <Route path="/login" element={<Login />} />
          
           
