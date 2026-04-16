@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Home, Building2, Sparkles, Sofa } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Truck, Package, Clock, MapPin } from "lucide-react";
 
 
   const steps = [
@@ -107,6 +108,29 @@ const plans = [
     highlight: false,
   },
 ];
+const logisticsServices = [
+  {
+    title: "Parcel Delivery",
+    description: "Fast and secure delivery for packages of all sizes.",
+    icon: Package,
+  },
+  {
+    title: "Same-day Delivery",
+    description: "Urgent deliveries handled within hours.",
+    icon: Clock,
+  },
+  {
+    title: "Bulk Transport",
+    description: "Efficient logistics for large and heavy goods.",
+    icon: Truck,
+  },
+  {
+    title: "Real-time Tracking",
+    description: "Track your shipments live with our system.",
+    icon: MapPin,
+  },
+];
+
 
 
 const HomePage = () => {
@@ -488,6 +512,74 @@ const handlePrev = () => {
 
   </div>
 </section>
+{/* logistics services */}
+  <section className="bg-primary py-20 px-6 text-white">
+      <div className="max-w-7xl mx-auto">
+
+        {/* HEADER */}
+        <motion.div
+          className="flex flex-col md:flex-row md:items-center md:justify-between mb-14"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div>
+            <p className="text-xs tracking-widest text-gray-400 uppercase mb-3">
+              Logistics Services
+            </p>
+
+            <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
+              Fast. Reliable. Delivered.
+            </h2>
+          </div>
+        </motion.div>
+
+        {/* GRID */}
+        <motion.div
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.15 },
+            },
+          }}
+        >
+          {logisticsServices.map((service, index) => {
+            const Icon = service.icon;
+
+            return (
+              <motion.div
+                key={index}
+                className="group p-6 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300"
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="mb-6">
+                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 group-hover:bg-accent transition">
+                    <Icon className="text-xl text-accent group-hover:text-black" />
+                  </div>
+                </div>
+
+                <h3 className="text-lg font-semibold mb-3">
+                  {service.title}
+                </h3>
+
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  {service.description}
+                </p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </div>
+    </section>
 {/* pricing section */}
 <section id="pricing">
   <div className="min-h-screen bg-[#f7f7f7] flex flex-col items-center px-4 sm:px-6 py-12 sm:py-16">
