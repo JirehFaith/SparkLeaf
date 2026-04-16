@@ -1,188 +1,337 @@
-import React, { useState } from "react";
+import { FaArrowLeft, FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import { FaClock, FaMapMarkerAlt } from "react-icons/fa";
 
-const houseServices = [
-  { id: 1, name: "House Cleaning", price: 50 },
-  { id: 2, name: "Deep Cleaning", price: 100 },
-  { id: 3, name: "Carpet Cleaning", price: 30 },
-];
+const BookingPage = () => {
+  const [step, setStep] = useState(1);
 
-const businessServices = [
-  { id: 4, name: "Office Cleaning", price: 150 },
-  { id: 5, name: "Window Cleaning", price: 80 },
-  { id: 6, name: "Industrial Cleaning", price: 200 },
-];
+  const [bookingData, setBookingData] = useState({
+    date: new Date(),
+    time: "",
+    address: "",
+    city: "",
+    phone: "",
+  });
 
-export default function BookingUI() {
-  const [selectedDate, setSelectedDate] = useState("Fri 07");
-  const [selectedTime, setSelectedTime] = useState("10 - 11 AM");
   const [selectedServices, setSelectedServices] = useState([]);
-  const [serviceType, setServiceType] = useState("house");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-
-  const toggleService = (service) => {
-    setSelectedServices((prev) =>
-      prev.includes(service)
-        ? prev.filter((s) => s !== service)
-        : [...prev, service]
-    );
-  };
-
-  const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
-  const advance = total * 0.2;
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 mt-24 flex justify-center">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* LEFT SIDE */}
-        <div className="md:col-span-2 bg-white p-6 rounded-xl shadow space-y-6">
-          <h2 className="text-lg font-semibold">Select a Slot</h2>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg grid grid-cols-1 md:grid-cols-2 overflow-hidden">
 
-          {/* DATE */}
-          <div>
-            <p className="text-sm mb-2">Select Date</p>
-            <div className="flex gap-2 flex-wrap">
-              {["Fri 07", "Sat 08", "Sun 09", "Mon 10"].map((d) => (
-                <button
-                  key={d}
-                  onClick={() => setSelectedDate(d)}
-                  className={`px-3 py-2 rounded border text-sm ${
-                    selectedDate === d
-                      ? "bg-primary text-white"
-                      : "bg-white"
-                  }`}
-                >
-                  {d}
-                </button>
-              ))}
-            </div>
-          </div>
+        {/* LEFT */}
+        <div className="hidden md:flex md:flex-col justify-between w-5/6 bg-gradient-to-b from-white to-gray-50 p-8 border-r border-gray-200">
 
-          {/* TIME */}
-          <div>
-            <p className="text-sm mb-2">Select Time</p>
-            <div className="flex gap-2 flex-wrap">
-              {["08-09 AM", "10-11 AM", "11-12 AM", "04-06 PM"].map(
-                (t) => (
-                  <button
-                    key={t}
-                    onClick={() => setSelectedTime(t)}
-                    className={`px-3 py-2 rounded border text-sm ${
-                      selectedTime === t
-                        ? "bg-primary text-white"
-                        : "bg-white"
-                    }`}
-                  >
-                    {t}
-                  </button>
-                )
-              )}
-            </div>
-          </div>
+  {/* Logo + Brand */}
+  <div className="space-y-4">
+    <div className="flex items-center gap-3">
+      <img src="./images/logo1.png" alt="logo" className="w-20 h-20 object-contain" />
+      <h1 className="text-xl font-semibold tracking-wide text-gray-800">
+        SparkLeaf
+      </h1>
+    </div>
 
-          {/* ADDRESS */}
-          <div>
-            <p className="text-sm mb-2">Address</p>
-            <input
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Enter your address"
-              className="w-full p-2 border rounded"
+    <p className="text-sm text-gray-500 mb-10">
+      Your strategic partner in growth
+    </p>
+  </div>
+
+  {/* Main Message */}
+  <div className="space-y-4">
+    <h2 className="text-3xl font-bold leading-tight text-gray-900">
+      Book Your <span className="text-primary">Services</span> Today
+    </h2>
+
+    <p className="text-gray-600 text-sm leading-relaxed">
+        Need brand growth? Get expert advice, tailored strategies,
+        and market smarter with confidence.
+    </p>
+  </div>
+
+  {/* Info */}
+  <div className="space-y-3 text-sm text-gray-600">
+   <div className="flex flex-col gap-3 text-sm text-gray-600">
+
+  <div className="flex items-center gap-3">
+    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-700">
+      <FaClock size={14} />
+    </div>
+    <span>Mon - Fri 9:00 - 17:00</span>
+  </div>
+
+  <div className="flex items-center gap-3">
+    <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-700">
+      <FaMapMarkerAlt size={14} />
+    </div>
+    <span>Kigali, Rwanda</span>
+  </div>
+
+</div>
+
+  </div>
+
+  {/* Social Icons */}
+  <div className="flex gap-3 mt-10">
+    {[FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn].map((Icon, i) => (
+      <div
+        key={i}
+        className="w-10 h-10 flex items-center justify-center rounded-full 
+        bg-white shadow-sm border border-gray-200 
+        hover:bg-primary hover:text-white hover:scale-105 
+        transition-all duration-200 cursor-pointer"
+      >
+        <Icon size={14} />
+      </div>
+    ))}
+  </div>
+
+</div>
+
+        {/* RIGHT */}
+        <div className="p-6 md:p-8">
+          {step === 1 && (
+            <StepDate
+              setStep={setStep}
+              bookingData={bookingData}
+              setBookingData={setBookingData}
             />
-          </div>
-
-          {/* PHONE */}
-          <div>
-            <p className="text-sm mb-2">Mobile Number</p>
-            <input
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Enter phone number"
-              className="w-full p-2 border rounded"
+          )}
+          {step === 2 && (
+            <StepAddress
+              setStep={setStep}
+              bookingData={bookingData}
+              setBookingData={setBookingData}
             />
-          </div>
-
-          {/* SERVICES */}
-          <div>
-            <p className="text-sm mb-2">Select Services</p>
-            <div className="space-y-2">
-              {/* SERVICES TYPE TOGGLE */}
-            <div className="flex bg-gray-200 rounded-lg p-1 w-fit mb-3">
-              <button
-                onClick={() => {
-                  setServiceType("house");
-                  setSelectedServices([]);
-                }}
-                className={`px-4 py-2 rounded-md text-sm ${
-                  serviceType === "house"
-                    ? "bg-primary text-white"
-                    : "text-gray-600"
-                }`}
-              >
-                House
-              </button>
-              <button
-                onClick={() => {
-                  setServiceType("business");
-                  setSelectedServices([]);
-                }}
-                className={`px-4 py-2 rounded-md text-sm ${
-                  serviceType === "business"
-                    ? "bg-primary text-white"
-                    : "text-gray-600"
-                }`}
-              >
-                Business
-              </button>
-            </div>
-
-            {(serviceType === "house" ? houseServices : businessServices).map((service) => (
-              <div
-                key={service.id}
-                className="flex justify-between items-center border p-3 rounded"
-              >
-                <span>
-                  {service.name} (${service.price})
-                </span>
-                <input
-                  type="checkbox"
-                  checked={selectedServices.includes(service)}
-                  onChange={() => toggleService(service)}
-                />
-              </div>
-            ))}
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT SIDE */}
-        <div className="bg-white p-6 rounded-xl shadow space-y-4">
-          <h3 className="font-semibold">Booking Details</h3>
-
-          <div className="text-sm">
-            <p className="font-medium">Services:</p>
-            {selectedServices.length === 0 ? (
-              <p className="text-gray-400">No service selected</p>
-            ) : (
-              selectedServices.map((s) => <p key={s.id}>{s.name}</p>)
-            )}
-          </div>
-
-          <div className="text-sm">
-            <p>Date: {selectedDate}</p>
-            <p>Time: {selectedTime}</p>
-          </div>
-
-          <div className="border-t pt-3 text-sm">
-            <p>Total: ${total}</p>
-            <p>Advance (20%): ${advance}</p>
-          </div>
-
-          <button className="w-full bg-primary text-white py-2 rounded">
-            Proceed to Pay ${advance}
-          </button>
+          )}
+          {step === 3 && (
+            <StepServices
+              setStep={setStep}
+              selectedServices={selectedServices}
+              setSelectedServices={setSelectedServices}
+            />
+          )}
+          {step === 4 && (
+            <StepPayment
+              selectedServices={selectedServices}
+              setStep={setStep}
+            />
+          )}
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default BookingPage;
+
+
+// STEP 1 date and time selection
+
+const StepDate = ({ setStep, bookingData, setBookingData }) => {
+  const [error, setError] = useState("");
+
+  const times = ["09:00","10:00","11:00","12:00","13:00","14:00"];
+
+  const handleContinue = () => {
+    if (!bookingData.date || !bookingData.time) {
+      setError("Select date and time");
+      return;
+    }
+    setError("");
+    setStep(2);
+  };
+
+  return (
+    <div>
+      <button className="flex items-center gap-2 text-gray-400 mb-4 cursor-not-allowed">
+        <FaArrowLeft /> Back
+      </button>
+
+      <h3 className="text-xl font-semibold mb-6">Select Date & Time</h3>
+
+      <DatePicker
+        selected={bookingData.date}
+        onChange={(date) =>
+          setBookingData({ ...bookingData, date })
+        }
+        minDate={new Date()}
+        inline
+      />
+
+      <div className="grid grid-cols-3 gap-3 mt-6">
+        {times.map((time) => (
+          <button
+            key={time}
+            onClick={() =>
+              setBookingData({ ...bookingData, time })
+            }
+            className={`py-2 rounded-lg border ${
+              bookingData.time === time
+                ? "bg-primary text-white"
+                : "bg-gray-100 hover:bg-primary hover:text-white"
+            }`}
+          >
+            {time}
+          </button>
+        ))}
+      </div>
+
+      {error && <p className="text-red-500 mt-3">{error}</p>}
+
+      <button
+        onClick={handleContinue}
+        className="mt-6 w-full py-3 bg-primary text-white rounded-lg"
+      >
+        Continue
+      </button>
+    </div>
+  );
+};
+
+// STEP 2 address input
+
+const StepAddress = ({ setStep, bookingData, setBookingData }) => {
+  const [error, setError] = useState("");
+
+  const handleContinue = () => {
+    if (!bookingData.address || !bookingData.phone) {
+      setError("Fill all required fields");
+      return;
+    }
+    setError("");
+    setStep(3);
+  };
+
+  return (
+    <div>
+      <button onClick={() => setStep(1)} className="flex gap-2 mb-4">
+        <FaArrowLeft /> Back
+      </button>
+
+      <h3 className="text-xl font-semibold mb-6">Enter Address</h3>
+
+      <div className="space-y-4">
+        <input
+          placeholder="Street Address"
+          className="w-full border p-3 rounded-lg"
+          value={bookingData.address}
+          onChange={(e) =>
+            setBookingData({ ...bookingData, address: e.target.value })
+          }
+        />
+
+        <input
+          placeholder="City"
+          className="w-full border p-3 rounded-lg"
+          value={bookingData.city}
+          onChange={(e) =>
+            setBookingData({ ...bookingData, city: e.target.value })
+          }
+        />
+
+        <input
+          placeholder="Phone"
+          className="w-full border p-3 rounded-lg"
+          value={bookingData.phone}
+          onChange={(e) =>
+            setBookingData({ ...bookingData, phone: e.target.value })
+          }
+        />
+      </div>
+
+      {error && <p className="text-red-500 mt-3">{error}</p>}
+
+      <button
+        onClick={handleContinue}
+        className="bg-primary text-white w-full mt-6 py-3 rounded-lg"
+      >
+        Continue
+      </button>
+    </div>
+  );
+};
+
+
+// STEP 3 services
+
+const StepServices = ({ setStep, selectedServices, setSelectedServices }) => {
+  const services = [
+    { name: "Home Cleaning", price: 30 },
+    { name: "Deep Cleaning", price: 50 },
+  ];
+
+  const toggle = (service) => {
+    const exists = selectedServices.find(s => s.name === service.name);
+
+    if (exists) {
+      setSelectedServices(prev => prev.filter(s => s.name !== service.name));
+    } else {
+      setSelectedServices(prev => [...prev, service]);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={() => setStep(2)} className="flex gap-2 mb-4">
+        <FaArrowLeft /> Back
+      </button>
+
+      <h3 className="text-xl font-semibold mb-6">Select Services</h3>
+
+      <div className="space-y-4">
+        {services.map((service) => {
+          const selected = selectedServices.find(s => s.name === service.name);
+
+          return (
+            <div
+              key={service.name}
+              onClick={() => toggle(service)}
+              className={`p-4 rounded-lg cursor-pointer ${
+                selected ? "bg-primary text-white" : "bg-gray-100"
+              }`}
+            >
+              {service.name} - ${service.price}
+            </div>
+          );
+        })}
+      </div>
+
+      <button
+        onClick={() => setStep(4)}
+        disabled={!selectedServices.length}
+        className="bg-primary text-white w-full mt-6 py-3 rounded-lg disabled:bg-gray-300"
+      >
+        Continue
+      </button>
+    </div>
+  );
+};
+
+// STEP 4 payment
+
+const StepPayment = ({ selectedServices, setStep }) => {
+  const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
+  const advance = total * 0.2;
+
+  return (
+    <div>
+      <h3 className="text-xl font-semibold mb-6">Payment</h3>
+
+      <p>Total: ${total}</p>
+      <p className="text-primary">Pay Now: ${advance}</p>
+
+      <button className="bg-primary text-white w-full mt-6 py-3 rounded-lg">
+        Pay ${advance}
+      </button>
+
+      <button
+        onClick={() => setStep(3)}
+        className="mt-4 text-gray-500 underline"
+      >
+        Go Back
+      </button>
+    </div>
+  );
+};
