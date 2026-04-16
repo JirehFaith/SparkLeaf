@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="flex justify-center">
          <ul className="flex flex-wrap justify-center items-center gap-6 text-secondary font-medium">
   <li>
-    <a href="#home" className="hover:text-white cursor-pointer transition">
+    <a href="/" className="hover:text-white cursor-pointer transition">
       Home
     </a>
   </li>
