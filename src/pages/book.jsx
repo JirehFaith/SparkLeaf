@@ -3,6 +3,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
+
 
 const BookingPage = () => {
   const [step, setStep] = useState(1);
@@ -45,8 +47,9 @@ const BookingPage = () => {
     </h2>
 
     <p className="text-gray-600 text-sm leading-relaxed">
-        Need brand growth? Get expert advice, tailored strategies,
-        and market smarter with confidence.
+       We provide professional cleaning solutions tailored to your lifestyle and business needs, ensuring every space we touch reflects cleanliness, order, and comfort.
+        Our services range from routine home cleaning to intensive deep cleaning and commercial maintenance, all delivered with attention to detail and consistency.
+        With a focus on reliability and quality, we help you maintain a spotless environment so you can focus on what truly matters.
     </p>
   </div>
 
@@ -118,6 +121,12 @@ const BookingPage = () => {
               setStep={setStep}
             />
           )}
+         {step === 5 && (
+  <StepConfirmation
+    bookingData={bookingData}
+    selectedServices={selectedServices}
+  />
+)}
         </div>
       </div>
     </div>
@@ -256,82 +265,329 @@ const StepAddress = ({ setStep, bookingData, setBookingData }) => {
 
 // STEP 3 services
 
+
 const StepServices = ({ setStep, selectedServices, setSelectedServices }) => {
-  const services = [
-    { name: "Home Cleaning", price: 30 },
-    { name: "Deep Cleaning", price: 50 },
+
+  const allServices = [
+    { title: "House Cleaning", price: 30 },
+    { title: "Deep Cleaning", price: 50 },
+    { title: "Move In/Out Cleaning", price: 60 },
+    { title: "Carpet Cleaning", price: 25 },
+
+    { title: "Office Cleaning", price: 40 },
+    { title: "Commercial Cleaning", price: 70 },
+    { title: "Maintenance Cleaning", price: 35 },
   ];
 
   const toggle = (service) => {
-    const exists = selectedServices.find(s => s.name === service.name);
+    const exists = selectedServices.find(s => s.title === service.title);
 
     if (exists) {
-      setSelectedServices(prev => prev.filter(s => s.name !== service.name));
+      setSelectedServices(prev =>
+        prev.filter(s => s.title !== service.title)
+      );
     } else {
       setSelectedServices(prev => [...prev, service]);
     }
   };
 
   return (
-    <div>
-      <button onClick={() => setStep(2)} className="flex gap-2 mb-4">
-        <FaArrowLeft /> Back
+    <div className="pt-12">
+
+      {/* Back Button */}
+      <button 
+        onClick={() => setStep(2)} 
+        className="flex items-center gap-2 mb-6 text-primary font-medium hover:opacity-80"
+      >
+        <FaArrowLeft />
+        Back
       </button>
 
-      <h3 className="text-xl font-semibold mb-6">Select Services</h3>
+      {/* Title */}
+      <h3 className="text-xl font-semibold mb-2">
+        Select Services
+      </h3>
 
-      <div className="space-y-4">
-        {services.map((service) => {
-          const selected = selectedServices.find(s => s.name === service.name);
+      <p className="text-sm text-gray-500 mb-6">
+        Choose one or more services for your booking
+      </p>
+
+      {/* Services List */}
+      <div className="space-y-3">
+
+        {allServices.map((service) => {
+          const selected = selectedServices.find(
+            s => s.title === service.title
+          );
 
           return (
             <div
-              key={service.name}
+              key={service.title}
               onClick={() => toggle(service)}
-              className={`p-4 rounded-lg cursor-pointer ${
-                selected ? "bg-primary text-white" : "bg-gray-100"
+              className={`p-4 rounded-lg cursor-pointer flex justify-between items-center transition ${
+                selected
+                  ? "bg-primary text-white border border-primary"
+                  : "bg-gray-100 hover:bg-gray-200 border border-transparent"
               }`}
             >
-              {service.name} - ${service.price}
+              {/* Service Name */}
+              <span className="font-medium">
+                {service.title}
+              </span>
+
+              {/* Price */}
+              <span className="font-semibold">
+                ${service.price}
+              </span>
             </div>
           );
         })}
+
       </div>
 
+      {/* Continue Button */}
       <button
         onClick={() => setStep(4)}
         disabled={!selectedServices.length}
-        className="bg-primary text-white w-full mt-6 py-3 rounded-lg disabled:bg-gray-300"
+        className="bg-primary text-white w-full mt-6 py-3 rounded-lg font-semibold disabled:bg-gray-300 disabled:cursor-not-allowed"
       >
-        Continue
+        Continue ({selectedServices.length})
       </button>
+
     </div>
   );
 };
+
+
 
 // STEP 4 payment
 
+
+
 const StepPayment = ({ selectedServices, setStep }) => {
-  const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
-  const advance = total * 0.2;
+  const [method, setMethod] = useState("visa");
+  const [phone, setPhone] = useState("");
+
+  const isValidRwandaNumber = (num) => {
+    return /^(07|2507)\d{8}$/.test(num);
+  };
+
+  const subtotal = useMemo(() => {
+    return selectedServices.reduce((acc, item) => acc + item.price, 0);
+  }, [selectedServices]);
+
+  const upfront = subtotal * 0.2;
+  const remaining = subtotal - upfront;
 
   return (
     <div>
-      <h3 className="text-xl font-semibold mb-6">Payment</h3>
-
-      <p>Total: ${total}</p>
-      <p className="text-primary">Pay Now: ${advance}</p>
-
-      <button className="bg-primary text-white w-full mt-6 py-3 rounded-lg">
-        Pay ${advance}
+      {/* Back */}
+      <button onClick={() => setStep(3)} className="flex gap-2 mb-4">
+        ← Back
       </button>
 
-      <button
-        onClick={() => setStep(3)}
-        className="mt-4 text-gray-500 underline"
-      >
-        Go Back
-      </button>
+      <h3 className="text-xl font-semibold mb-6">Payment Method</h3>
+
+      {/* Payment Methods */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-6">
+
+        <label className={`border p-3 rounded-lg flex items-center justify-center cursor-pointer ${method==="mastercard"?"border-primary":"border-gray-200"}`}>
+          <input type="radio" className="mr-2" checked={method==="mastercard"} onChange={()=>setMethod("mastercard")} required />
+          <img src="/images/payments/mastercardLogo.svg" className="h-6 object-contain" />
+        </label>
+
+        <label className={`border p-3 rounded-lg flex items-center justify-center cursor-pointer ${method==="visa"?"border-primary":"border-gray-200"}`}>
+          <input type="radio" className="mr-2" checked={method==="visa"} onChange={()=>setMethod("visa")} />
+          <img src="/images/payments/visa.png" className="h-6 object-contain" />
+        </label>
+
+        <label className={`border p-3 rounded-lg flex items-center justify-center cursor-pointer ${method==="paypal"?"border-primary":"border-gray-200"}`}>
+          <input type="radio" className="mr-2" checked={method==="paypal"} onChange={()=>setMethod("paypal")} required />
+          <img src="/images/payments/paypal.png" className="h-6 object-contain"  />
+        </label>
+
+        <label className={`border p-3 rounded-lg flex items-center justify-center gap-2 cursor-pointer ${method==="momo"?"border-primary":"border-gray-200"}`}>
+          <input type="radio" checked={method==="momo"} onChange={()=>setMethod("momo")} required />
+          <img src="/images/payments/mtn_momo.png" className="h-6 object-contain" />
+          <span className="text-sm">MoMo</span>
+        </label>
+
+        <label className={`border p-3 rounded-lg flex items-center justify-center cursor-pointer ${method==="cash"?"border-primary":"border-gray-200"}`}>
+          <input type="radio" className="mr-2" checked={method==="cash"} onChange={()=>setMethod("cash")} />
+          <span className="text-sm">Cash</span>
+        </label>
+      </div>
+
+      {/* Card Fields */}
+      {(method === "visa" || method === "mastercard") && (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <input placeholder="Card Number" className="border p-2 rounded-md w-full" />
+            <input placeholder="Cardholder" className="border p-2 rounded-md w-full" />
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+            <input placeholder="MM/YY" className="border p-2 rounded-md w-full" />
+            <input placeholder="CVC" className="border p-2 rounded-md w-full" />
+          </div>
+        </>
+      )}
+
+      {/* MoMo */}
+      {method === "momo" && (
+        <div className="mb-6">
+          <label className="text-sm text-gray-600">MTN MoMo Number</label>
+
+          <div className="flex items-center border rounded-md mt-1 overflow-hidden">
+            <span className="px-3 bg-gray-100 text-gray-600 text-sm">+250</span>
+            <input
+              type="tel"
+              placeholder="78XXXXXXX"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="w-full p-2 outline-none"
+            />
+          </div>
+
+          {phone && !isValidRwandaNumber(phone) && (
+            <p className="text-red-500 text-xs mt-1">
+              Enter valid MTN number
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Summary */}
+      <div className="bg-gray-50 p-4 rounded-lg mb-6">
+        <p className="font-semibold mb-3">Summary</p>
+
+        {selectedServices.map((item, i) => (
+          <div key={i} className="flex justify-between text-sm mb-1">
+            <span>{item.name}</span>
+            <span>${item.price}</span>
+          </div>
+        ))}
+
+        <div className="border-t mt-3 pt-3 text-sm">
+          <div className="flex justify-between">
+            <span>Total</span>
+            <span>${subtotal}</span>
+          </div>
+
+          <div className="flex justify-between text-primary font-semibold mt-2">
+            <span>Pay Now (20%)</span>
+            <span>${upfront}</span>
+          </div>
+
+          <div className="flex justify-between text-gray-500 mt-1">
+            <span>Remaining</span>
+            <span>${remaining}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Pay Button */}
+    <button 
+  onClick={() => setStep(5)}
+  disabled={method==="momo" && !isValidRwandaNumber(phone)}
+  className={`w-full py-3 rounded-lg text-white ${
+    method==="momo" && !isValidRwandaNumber(phone)
+      ? "bg-gray-400"
+      : "bg-primary"
+  }`}
+>
+  Pay ${upfront}
+</button>
     </div>
   );
 };
+
+// confirmation of payment
+
+const StepConfirmation = ({ bookingData, selectedServices }) => {
+  const total = selectedServices.reduce((sum, s) => sum + s.price, 0);
+  const upfront = total * 0.2;
+  const remaining = total - upfront;
+
+  return (
+    <div className="text-center">
+
+      {/* Success Icon */}
+      <div className="flex justify-center mb-4">
+        <FaCheckCircle className="text-green-500 text-5xl" />
+      </div>
+
+      <h3 className="text-2xl font-bold mb-2">
+        Booking Confirmed 
+      </h3>
+
+      <p className="text-gray-600 mb-6">
+        Your service has been successfully scheduled.
+      </p>
+
+      {/* DETAILS */}
+      <div className="bg-gray-50 rounded-lg p-4 text-left space-y-3 mb-6">
+
+        <div className="flex justify-between text-sm">
+          <span className="text-gray-500">Date</span>
+          <span>{bookingData.date.toDateString()}</span>
+        </div>
+
+        <div className="flex justify-between text-sm">
+          <span className="text-gray-500">Time</span>
+          <span>{bookingData.time}</span>
+        </div>
+
+        <div className="flex justify-between text-sm">
+          <span className="text-gray-500">Address</span>
+          <span>{bookingData.address}</span>
+        </div>
+
+        <div className="flex justify-between text-sm">
+          <span className="text-gray-500">Phone</span>
+          <span>{bookingData.phone}</span>
+        </div>
+
+      </div>
+
+      {/* SERVICES */}
+      <div className="bg-gray-50 rounded-lg p-4 text-left mb-6">
+        <p className="font-semibold mb-3">Services</p>
+
+        {selectedServices.map((service, i) => (
+          <div key={i} className="flex justify-between text-sm mb-1">
+            <span>{service.name}</span>
+            <span>${service.price}</span>
+          </div>
+        ))}
+
+        <div className="border-t mt-3 pt-3 text-sm">
+          <div className="flex justify-between">
+            <span>Total</span>
+            <span>${total}</span>
+          </div>
+
+          <div className="flex justify-between text-primary font-semibold mt-2">
+            <span>Paid (20%)</span>
+            <span>${upfront}</span>
+          </div>
+
+          <div className="flex justify-between text-gray-500 mt-1">
+            <span>Remaining</span>
+            <span>${remaining}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ACTION BUTTON */}
+      <button
+        onClick={() => window.location.href = "/"}
+        className="w-full bg-primary text-white py-3 rounded-lg font-semibold"
+      >
+        Back to Home
+      </button>
+
+    </div>
+  );
+};
+

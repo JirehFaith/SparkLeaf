@@ -377,9 +377,6 @@ const handlePrev = () => {
   </div>
 </section>
 {/* services */}
-
-
-
 <section id="services" className="bg-gray-100/10 py-20 px-6">
   <div className="max-w-7xl mx-auto">
 
