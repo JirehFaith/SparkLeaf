@@ -20,7 +20,7 @@ const BookingPage = () => {
   const [selectedServices, setSelectedServices] = useState([]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center ">
       <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg grid grid-cols-1 md:grid-cols-2 overflow-hidden">
 
         {/* LEFT */}
@@ -28,12 +28,7 @@ const BookingPage = () => {
 
   {/* Logo + Brand */}
   <div className="space-y-4">
-    <div className="flex items-center gap-3">
-      <img src="./images/logo1.png" alt="logo" className="w-20 h-20 object-contain" />
-      <h1 className="text-xl font-semibold tracking-wide text-gray-800">
-        SparkLeaf
-      </h1>
-    </div>
+    <p className="text-teal-500 text-sm font-bold">Book now</p>
 
     <p className="text-sm text-gray-500 mb-10">
       Your strategic partner in growth
@@ -412,7 +407,7 @@ const StepPayment = ({ selectedServices, setStep }) => {
           <span className="text-sm">MoMo</span>
         </label>
 
-        
+
       </div>
 
       {/* Card Fields */}

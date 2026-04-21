@@ -578,6 +578,8 @@ const handlePrev = () => {
       </div>
     </section>
 {/* pricing section */}
+
+
 <section id="pricing">
   <div className="min-h-screen bg-[#f7f7f7] flex flex-col items-center px-4 sm:px-6 py-12 sm:py-16">
 
