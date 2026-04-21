@@ -412,10 +412,7 @@ const StepPayment = ({ selectedServices, setStep }) => {
           <span className="text-sm">MoMo</span>
         </label>
 
-        <label className={`border p-3 rounded-lg flex items-center justify-center cursor-pointer ${method==="cash"?"border-primary":"border-gray-200"}`}>
-          <input type="radio" className="mr-2" checked={method==="cash"} onChange={()=>setMethod("cash")} />
-          <span className="text-sm">Cash</span>
-        </label>
+        
       </div>
 
       {/* Card Fields */}

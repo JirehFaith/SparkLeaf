@@ -364,7 +364,7 @@ const handlePrev = () => {
           visible: { opacity: 1, y: 0 },
         }}
       >
-        <button className="bg-primary hover:bg-teal-600 text-white px-6 py-2.5 rounded-full text-sm font-medium shadow">
+        <button className="bg-primary hover:bg-teal-600 text-white px-6 py-2.5 rounded text-sm font-medium shadow">
           View Our Services
         </button>
 
@@ -857,7 +857,7 @@ const handlePrev = () => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full shadow hover:opacity-90 transition"
+        className="flex items-center gap-3 bg-primary text-white px-6 py-3 rounded shadow hover:opacity-90 transition"
       >
         Live Chat
         <motion.span
@@ -886,7 +886,7 @@ const handlePrev = () => {
             <input
               type="text"
               placeholder="Enter your first name..."
-              className="w-full mt-2 px-4 py-3 rounded-full border border-gray-200 outline-none focus:ring-2 focus:ring-black transition"
+              className="w-full mt-2 px-4 py-3 rounded border border-gray-200 outline-none focus:ring-2 focus:ring-black transition"
             />
           </motion.div>
 
@@ -895,7 +895,7 @@ const handlePrev = () => {
             <input
               type="text"
               placeholder="Enter your last name..."
-              className="w-full mt-2 px-4 py-3 rounded-full border border-gray-200 outline-none focus:ring-2 focus:ring-black transition"
+              className="w-full mt-2 px-4 py-3 rounded border border-gray-200 outline-none focus:ring-2 focus:ring-black transition"
             />
           </motion.div>
         </div>
@@ -906,7 +906,7 @@ const handlePrev = () => {
           <input
             type="email"
             placeholder="Enter your email address..."
-            className="w-full mt-2 px-4 py-3 rounded-full border border-gray-200 outline-none focus:ring-2 focus:ring-black transition"
+            className="w-full mt-2 px-4 py-3 rounded border border-gray-200 outline-none focus:ring-2 focus:ring-black transition"
           />
         </motion.div>
 
@@ -918,7 +918,7 @@ const handlePrev = () => {
           <textarea
             rows="5"
             placeholder="Enter your message..."
-            className="w-full mt-2 px-4 py-3 rounded-2xl border border-gray-200 outline-none focus:ring-2 focus:ring-black resize-none transition"
+            className="w-full mt-2 px-4 py-3 rounded border border-gray-200 outline-none focus:ring-2 focus:ring-black resize-none transition"
           ></textarea>
         </motion.div>
 
@@ -928,7 +928,7 @@ const handlePrev = () => {
             type="submit"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 bg-primary text-white px-6 py-3 rounded-full shadow hover:opacity-90 transition"
+            className="flex items-center gap-3 bg-primary text-white px-6 py-3 rounded shadow hover:opacity-90 transition"
           >
             Send Message
             <motion.span
