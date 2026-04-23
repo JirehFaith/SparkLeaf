@@ -9,6 +9,7 @@ import Booking from "./pages/book"
 import SignUp from "./pages/register"
 
 
+
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
           <Route path="/booking" element={<Booking />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<SignUp />} />
+          
           
          
           

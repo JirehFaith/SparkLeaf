@@ -130,6 +130,40 @@ const logisticsServices = [
     icon: MapPin,
   },
 ];
+const features = [
+  {
+    id: "01",
+    title: "Professional Cleaning Team",
+    desc: "Our trained and experienced cleaners ensure every space is spotless and hygienic.",
+  },
+  {
+    id: "02",
+    title: "24/7 Customer Support",
+    desc: "Need help or want to reschedule? Our support team is available anytime to assist you.",
+  },
+  {
+    id: "03",
+    title: "Satisfaction Guarantee",
+    desc: "Not happy with the service? We’ll come back and fix it at no extra cost.",
+  },
+  {
+    id: "04",
+    title: "Fast & Reliable Service",
+    desc: "We work efficiently to deliver high-quality cleaning within your preferred time.",
+  },
+  {
+    id: "05",
+    title: "Affordable Packages",
+    desc: "Choose from flexible pricing plans designed for homes, offices, and businesses.",
+  },
+  {
+    id: "06",
+    title: "Eco-Friendly Products",
+    desc: "We use safe and environmentally friendly cleaning products for your health and safety.",
+  },
+];
+
+
 
 
 
@@ -577,6 +611,92 @@ const handlePrev = () => {
         </motion.div>
       </div>
     </section>
+    {/* why choose Us */}
+
+     <section className="bg-gray-100 py-16 px-6">
+      {/* TOP */}
+      <div className="max-w-6xl mx-auto text-center">
+        <p className="text-xs text-blue-500 tracking-widest mb-2">
+          WHY CHOOSE OUR CLEANING SERVICES
+        </p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12">
+          Why Choose Us
+        </h2>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 text-left">
+          {features.map((item) => (
+            <div key={item.id} className="space-y-3">
+              <div className="flex items-center gap-3">
+                <span className="text-blue-500 font-semibold">
+                  {item.id}
+                </span>
+                <div className="h-[1px] w-10 bg-gray-300"></div>
+              </div>
+
+              <h3 className="font-semibold text-lg">
+                {item.title}
+              </h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* BOTTOM */}
+      <div className="max-w-5xl mx-auto mt-20 flex flex-col md:flex-row items-center justify-center gap-12">
+        
+        {/* EXPERIENCE CIRCLE */}
+        <div className="relative flex items-center justify-center">
+          {/* blue offset */}
+          <div className="w-44 h-44 md:w-48 md:h-48 rounded-full bg-blue-500 absolute -left-3"></div>
+
+          {/* white card */}
+          <div className="w-44 h-44 md:w-48 md:h-48 rounded-full bg-white shadow-2xl flex flex-col items-center justify-center relative z-10">
+            <h1 className="text-4xl md:text-5xl font-bold text-blue-600">
+              10
+            </h1>
+            <p className="text-sm text-gray-600 text-center leading-tight">
+              Years <br /> Of Experience
+            </p>
+          </div>
+        </div>
+
+        {/* STATS */}
+        <div className="grid grid-cols-3 md:grid-cols-1 gap-6 text-center md:text-left">
+          
+          <div className="bg-white shadow-md rounded-lg px-6 py-4">
+            <h3 className="text-xl md:text-2xl font-bold text-blue-600">
+              2K+
+            </h3>
+            <p className="text-gray-500 text-sm">
+              Homes Cleaned
+            </p>
+          </div>
+
+          <div className="bg-white shadow-md rounded-lg px-6 py-4">
+            <h3 className="text-xl md:text-2xl font-bold text-blue-600">
+              150+
+            </h3>
+            <p className="text-gray-500 text-sm">
+              Professional Cleaners
+            </p>
+          </div>
+
+          <div className="bg-white shadow-md rounded-lg px-6 py-4">
+            <h3 className="text-xl md:text-2xl font-bold text-blue-600">
+              98%
+            </h3>
+            <p className="text-gray-500 text-sm">
+              Satisfaction
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
 {/* pricing section */}
 
 
