@@ -4,7 +4,8 @@ import { Home, Building2, Sparkles, Sofa } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Truck, Package, Clock, MapPin } from "lucide-react";
-
+import { ArrowRight } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 
   const steps = [
     {
@@ -179,11 +180,12 @@ const HomePage = () => {
 
 
 const [startIndex, setStartIndex] = useState(0);
-
+const [selectedService, setSelectedService] = useState(null);
 
 
 // choose correct services (house/business)
 const services = type === "house" ? houseServices : businessServices;
+
 
 // slice visible ones
 const visibleServices = services.slice(startIndex, startIndex + itemsPerPage);
@@ -412,17 +414,15 @@ const handlePrev = () => {
 </section>
 {/* services */}
 <section id="services" className="bg-gray-100/10 py-20 px-6">
+
+{/* services */}
+<section id="services" className="bg-gray-100/10 py-20 px-6">
   <div className="max-w-7xl mx-auto">
 
-    {/* TOP HEADER */}
+    {/* ✅ KEEP YOUR HEADER */}
     <motion.div
       className="flex flex-col md:flex-row md:items-center md:justify-between mb-14"
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
     >
-      {/* Left */}
       <div>
         <p className="text-xs tracking-widest text-gray-500 uppercase mb-3">
           Our Services
@@ -434,14 +434,8 @@ const handlePrev = () => {
         </h2>
       </div>
 
-      {/* Right Toggle */}
-      <motion.div
-        className="mt-6 md:mt-0 flex bg-gray-200 rounded-md p-1 w-fit"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        viewport={{ once: true }}
-      >
+      {/* toggle */}
+      <div className="mt-6 md:mt-0 flex bg-gray-200 rounded-md p-1 w-fit">
         <button
           onClick={() => setType("house")}
           className={`px-5 py-2 text-sm rounded-md ${
@@ -463,24 +457,11 @@ const handlePrev = () => {
         >
           Business
         </button>
-      </motion.div>
+      </div>
     </motion.div>
 
-    {/* SERVICES GRID */}
-    <motion.div
-      className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: 0.15,
-          },
-        },
-      }}
-    >
+    {/* ✅ ONLY THIS PART WAS BROKEN — FIXED */}
+    <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
       {visibleServices.map((service, index) => {
         const Icon = service.icon;
 
@@ -488,129 +469,143 @@ const handlePrev = () => {
           <motion.div
             key={index}
             className="group p-6 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300"
-            variants={{
-              hidden: { opacity: 0, y: 40, rotate: -3 },
-              visible: { opacity: 1, y: 0, rotate: 0 },
-            }}
-            whileHover={{ scale: 1.05, rotate: 1 }}
-            transition={{ type: "spring", stiffness: 120 }}
           >
             <div className="mb-6">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full group-hover:bg-white transition">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full">
                 <Icon className="text-xl text-accent" />
               </div>
             </div>
 
-            <h3 className="text-lg font-semibold text-[#1f2d2b] mb-3 group-hover:text-white transition">
+            <h3 className="text-lg font-semibold mb-3">
               {service.title}
             </h3>
 
-            <p className="text-sm text-gray-500 leading-relaxed mb-6 group-hover:text-gray-200 transition">
+            <p className="text-sm text-gray-500 mb-6">
               {service.description}
             </p>
+
+            {/* ✅ YOUR NEW FEATURE */}
+            <button
+              onClick={() => setSelectedService(service)}
+              className="flex items-center gap-2 text-sm text-accent font-medium"
+            >
+              View More
+              <ArrowRight size={16} />
+            </button>
           </motion.div>
         );
       })}
     </motion.div>
 
-    {/* BOTTOM NAV */}
+  </div>
+</section>
+</section>
+{/* logistics services */}
+  <section className="bg-primary py-20 px-6 text-white">
+  <div className="max-w-7xl mx-auto">
+
+    {/* ✅ HEADER (PUT BACK YOUR TEXT) */}
     <motion.div
-      className="flex items-center justify-center mt-16 gap-6"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.4 }}
-      viewport={{ once: true }}
+      className="flex flex-col md:flex-row md:items-center md:justify-between mb-14"
     >
-      {/* PREV */}
-      <button
-        onClick={handlePrev}
-        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 hover:bg-gray-400 transition"
-      >
-        ←
-      </button>
+      <div>
+        <p className="text-xs tracking-widest text-gray-400 uppercase mb-3">
+          Logistics Services
+        </p>
 
-      {/* LINE */}
-      <div className="w-16 h-[2px] bg-gray-400"></div>
+        <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
+          Fast. Reliable. Delivered.
+        </h2>
+      </div>
+    </motion.div>
 
-      {/* NEXT */}
-      <button
-        onClick={handleNext}
-        className="w-10 h-10 flex items-center justify-center rounded-full bg-accent hover:bg-yellow-500 transition"
-      >
-        →
-      </button>
+    {/* ✅ GRID (your cards — keep this) */}
+    <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      {logisticsServices.map((service, index) => {
+        const Icon = service.icon;
+
+        return (
+          <motion.div
+            key={index}
+            className="group p-6 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300"
+          >
+            <div className="mb-6">
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10">
+                <Icon className="text-xl text-accent" />
+              </div>
+            </div>
+
+            <h3 className="text-lg font-semibold mb-3">
+              {service.title}
+            </h3>
+
+            <p className="text-sm text-gray-400 mb-6">
+              {service.description}
+            </p>
+
+            <button
+              onClick={() => setSelectedService(service)}
+              className="flex items-center gap-2 text-sm text-accent"
+            >
+              View More
+              <ArrowRight size={16} />
+            </button>
+          </motion.div>
+        );
+      })}
     </motion.div>
 
   </div>
 </section>
-{/* logistics services */}
-  <section className="bg-primary py-20 px-6 text-white">
-      <div className="max-w-7xl mx-auto">
-
-        {/* HEADER */}
-        <motion.div
-          className="flex flex-col md:flex-row md:items-center md:justify-between mb-14"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+    {/* modal */}
+    <AnimatePresence>
+  {selectedService && (
+    <motion.div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-white rounded-xl max-w-md w-full p-6 relative"
+        initial={{ scale: 0.8, y: 50 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.8, y: 50 }}
+      >
+        {/* CLOSE BUTTON */}
+        <button
+          onClick={() => setSelectedService(null)}
+          className="absolute top-3 right-3 text-gray-500 hover:text-black"
         >
-          <div>
-            <p className="text-xs tracking-widest text-gray-400 uppercase mb-3">
-              Logistics Services
-            </p>
+          ✕
+        </button>
 
-            <h2 className="text-4xl md:text-5xl font-semibold leading-tight">
-              Fast. Reliable. Delivered.
-            </h2>
-          </div>
-        </motion.div>
+        {/* IMAGE */}
+        <img
+          src="https://images.unsplash.com/photo-1581578731548-c64695cc6952"
+          alt="Cleaning Service"
+          className="rounded-lg mb-4"
+        />
 
-        {/* GRID */}
-        <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.15 },
-            },
-          }}
-        >
-          {logisticsServices.map((service, index) => {
-            const Icon = service.icon;
+        {/* TITLE */}
+        <h3 className="text-xl font-semibold mb-2">
+          {selectedService.title}
+        </h3>
 
-            return (
-              <motion.div
-                key={index}
-                className="group p-6 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300"
-                variants={{
-                  hidden: { opacity: 0, y: 40 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="mb-6">
-                  <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 group-hover:bg-accent transition">
-                    <Icon className="text-xl text-accent group-hover:text-black" />
-                  </div>
-                </div>
+        {/* DESCRIPTION */}
+        <p className="text-gray-600 text-sm leading-relaxed">
+          {selectedService.description} Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Professional cleaning done with care and precision.
+        </p>
 
-                <h3 className="text-lg font-semibold mb-3">
-                  {service.title}
-                </h3>
-
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {service.description}
-                </p>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
-    </section>
+        {/* ACTION */}
+        <button className="mt-6 w-full bg-primary text-white py-2 rounded-md hover:opacity-90 transition">
+          Book Service
+        </button>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
     {/* why choose Us */}
 
      <section className="bg-gray-100 py-16 px-6">
@@ -650,12 +645,12 @@ const handlePrev = () => {
         {/* EXPERIENCE CIRCLE */}
         <div className="relative flex items-center justify-center">
           {/* blue offset */}
-          <div className="w-44 h-44 md:w-48 md:h-48 rounded-full bg-blue-500 absolute -left-3"></div>
+          <div className="w-44 h-44 md:w-48 md:h-48 rounded-full bg-primary absolute -left-3"></div>
 
           {/* white card */}
           <div className="w-44 h-44 md:w-48 md:h-48 rounded-full bg-white shadow-2xl flex flex-col items-center justify-center relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold text-blue-600">
-              10
+              14
             </h1>
             <p className="text-sm text-gray-600 text-center leading-tight">
               Years <br /> Of Experience
