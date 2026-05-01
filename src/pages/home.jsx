@@ -25,27 +25,34 @@ import { AnimatePresence } from "framer-motion";
     },
   ];
   
-
 const houseServices = [
   {
     icon: FaHome,
     title: "House Cleaning",
     description: "Professional cleaning for your home spaces.",
+    before: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=800&auto=format&fit=crop",
+    after: "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=800&auto=format&fit=crop",
   },
   {
     icon: FaBroom,
     title: "Deep Cleaning",
     description: "Detailed cleaning for every corner.",
+    before: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=800&auto=format&fit=crop",
+    after: "https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=800&auto=format&fit=crop",
   },
   {
     icon: FaCouch,
     title: "Move In/Out Cleaning",
     description: "Perfect cleaning when moving homes.",
+    before: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800&auto=format&fit=crop",
+    after: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=800&auto=format&fit=crop",
   },
   {
     icon: FaCouch,
     title: "Carpet Cleaning",
     description: "Fresh and clean carpets.",
+    before: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?q=80&w=800&auto=format&fit=crop",
+    after: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
@@ -164,7 +171,40 @@ const features = [
   },
 ];
 
-
+const visibleServices = [
+  {
+    title: "House Cleaning",
+    description: "Deep cleaning for a spotless and fresh home.",
+    before:
+      "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=800&auto=format&fit=crop",
+    after:
+      "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    title: "Office Cleaning",
+    description: "Clean workspace for better productivity.",
+    before:
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop",
+    after:
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    title: "Living Room Cleaning",
+    description: "Fresh and organized living spaces.",
+    before:
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=800&auto=format&fit=crop",
+    after:
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=800&auto=format&fit=crop",
+  },
+  {
+    title: "Kitchen Cleaning",
+    description: "Hygienic and sparkling kitchen spaces.",
+    before:
+      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800&auto=format&fit=crop",
+    after:
+      "https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=800&auto=format&fit=crop",
+  },
+];
 
 
 
@@ -188,8 +228,16 @@ const services = type === "house" ? houseServices : businessServices;
 
 
 // slice visible ones
-const visibleServices = services.slice(startIndex, startIndex + itemsPerPage);
+// const visibleServices = services
+const baseServices =
+type === "house" ? houseServices : businessServices;
 
+const safeStart = Math.max(0, startIndex);
+
+const visibleServices = baseServices.slice(
+  safeStart,
+  safeStart + itemsPerPage
+);
 // next
 const handleNext = () => {
   if (startIndex + itemsPerPage < services.length) {
@@ -413,93 +461,91 @@ const handlePrev = () => {
   </div>
 </section>
 {/* services */}
-<section id="services" className="bg-gray-100/10 py-20 px-6">
+ <section id="services" className="bg-gray-100/10 py-20 px-6">
+      <div className="max-w-7xl mx-auto">
 
-{/* services */}
-<section id="services" className="bg-gray-100/10 py-20 px-6">
-  <div className="max-w-7xl mx-auto">
-
-    {/* ✅ KEEP YOUR HEADER */}
-    <motion.div
-      className="flex flex-col md:flex-row md:items-center md:justify-between mb-14"
-    >
-      <div>
-        <p className="text-xs tracking-widest text-gray-500 uppercase mb-3">
-          Our Services
-        </p>
-
-        <h2 className="text-4xl md:text-5xl font-semibold text-[#1f2d2b] leading-tight">
-          Perfect cleanliness <br />
-          without effort!
-        </h2>
-      </div>
-
-      {/* toggle */}
-      <div className="mt-6 md:mt-0 flex bg-gray-200 rounded-md p-1 w-fit">
-        <button
-          onClick={() => setType("house")}
-          className={`px-5 py-2 text-sm rounded-md ${
-            type === "house"
-              ? "bg-primary text-white"
-              : "text-gray-600"
-          }`}
-        >
-          House
-        </button>
-
-        <button
-          onClick={() => setType("business")}
-          className={`px-5 py-2 text-sm rounded-md ${
-            type === "business"
-              ? "bg-primary text-white"
-              : "text-gray-600"
-          }`}
-        >
-          Business
-        </button>
-      </div>
-    </motion.div>
-
-    {/* ✅ ONLY THIS PART WAS BROKEN — FIXED */}
-    <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-      {visibleServices.map((service, index) => {
-        const Icon = service.icon;
-
-        return (
-          <motion.div
-            key={index}
-            className="group p-6 rounded-lg shadow-sm hover:shadow-lg hover:-translate-y-2 transition-all duration-300"
-          >
-            <div className="mb-6">
-              <div className="w-12 h-12 flex items-center justify-center rounded-full">
-                <Icon className="text-xl text-accent" />
-              </div>
-            </div>
-
-            <h3 className="text-lg font-semibold mb-3">
-              {service.title}
-            </h3>
-
-            <p className="text-sm text-gray-500 mb-6">
-              {service.description}
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-14">
+          <div>
+            <p className="text-xs tracking-widest text-gray-500 uppercase mb-3">
+              Our Services
             </p>
 
-            {/* ✅ YOUR NEW FEATURE */}
-            <button
-              onClick={() => setSelectedService(service)}
-              className="flex items-center gap-2 text-sm text-accent font-medium"
-            >
-              View More
-              <ArrowRight size={16} />
-            </button>
-          </motion.div>
-        );
-      })}
-    </motion.div>
+            <h2 className="text-4xl md:text-5xl font-semibold text-[#1f2d2b] leading-tight">
+              Perfect cleanliness <br />
+              without effort!
+            </h2>
+          </div>
+        </div>
 
-  </div>
-</section>
-</section>
+        {/* CARDS */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          
+          {visibleServices.map((service, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300"
+            >
+
+              {/* IMAGES */}
+              <div className="flex">
+
+                {/* BEFORE */}
+                <div className="relative w-1/2">
+                  <img
+                    src={service.before}
+                    alt="Before cleaning"
+                    className="w-full h-44 object-cover"
+                    onError={(e) => {
+                      e.target.src = "https://via.placeholder.com/400x300";
+                    }}
+                  />
+                  <span className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                    Before
+                  </span>
+                </div>
+
+                {/* AFTER */}
+                <div className="relative w-1/2">
+                  <img
+                    src={service.after}
+                    alt="After cleaning"
+                    className="w-full h-44 object-cover"
+                    onError={(e) => {
+                      e.target.src = "https://via.placeholder.com/400x300";
+                    }}
+                  />
+                  <span className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
+                    After
+                  </span>
+                </div>
+
+              </div>
+
+              {/* CONTENT */}
+              <div className="p-5">
+                <h3 className="text-lg font-semibold mb-2">
+                  {service.title}
+                </h3>
+
+                <p className="text-sm text-gray-500 mb-4">
+                  {service.description}
+                </p>
+
+                <Link to="/login">
+                  <button className="w-full bg-primary text-white py-2 rounded-md hover:opacity-90 transition">
+                    Book Now
+                  </button>
+                </Link>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
 {/* logistics services */}
   <section className="bg-primary py-20 px-6 text-white">
   <div className="max-w-7xl mx-auto">
@@ -593,10 +639,9 @@ const handlePrev = () => {
         </h3>
 
         {/* DESCRIPTION */}
-        <p className="text-gray-600 text-sm leading-relaxed">
-          {selectedService.description} Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit. Professional cleaning done with care and precision.
-        </p>
+       <p className="text-gray-600 text-sm leading-relaxed">
+  {selectedService.description || "High-quality service delivered with professionalism and care."}
+</p>
 
         {/* ACTION */}
         <button className="mt-6 w-full bg-primary text-white py-2 rounded-md hover:opacity-90 transition">
