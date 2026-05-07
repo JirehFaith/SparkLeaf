@@ -515,7 +515,7 @@ const handlePrev = () => {
                       e.target.src = "https://via.placeholder.com/400x300";
                     }}
                   />
-                  <span className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
+                  <span className="absolute top-2 left-2 bg-accent text-white text-xs px-2 py-1 rounded">
                     After
                   </span>
                 </div>
