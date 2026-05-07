@@ -261,91 +261,98 @@ const handlePrev = () => {
     <>
       {/* HERO */}
  
-
 <section
   id="home"
-  className="bg-[#054C7A] min-h-[90vh] flex items-center"
+  className="bg-[#054C7A] overflow-hidden pt-24 md:pt-16"
 >
-  <div className="container mx-auto px-12 flex flex-col lg:flex-row items-center justify-between gap-8">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    {/* Content */}
-    <motion.div
-      className="w-full lg:w-1/2 text-center lg:text-left text-blue-50"
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <motion.h1
-        className="text-3xl lg:text-5xl font-bold leading-tight"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-      >
-        Professional Cleaning Services Across Multi-City
-      </motion.h1>
-
-      <motion.p
-        className="text-lg lg:text-2xl mt-4 opacity-80"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-      >
-        Book trusted cleaners anytime, anywhere in Multi-City
-      </motion.p>
-
-      {/* CTA */}
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-10 min-h-[auto] lg:min-h-screen">
+      
+      {/* LEFT CONTENT */}
       <motion.div
-        className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
-        }}
+        className="w-full lg:w-1/2 text-center lg:text-left text-blue-50"
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
       >
-  <motion.div
-  variants={{
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  }}
->
-  <Link
-    to="/login"
-    className="inline-block border border-blue-50 text-blue-50 px-6 py-3 rounded-md hover:opacity-90 transition"
-  >
-    Book now
-  </Link>
-</motion.div>
+        <motion.h1
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          Professional Cleaning Services Across Multi-City
+        </motion.h1>
 
-        <motion.button
-          className="border border-primary bg-white text-primary px-6 py-3 rounded-md hover:bg-white/80 transition"
+        <motion.p
+          className="text-base sm:text-lg lg:text-2xl mt-4 opacity-80"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          Book trusted cleaners anytime, anywhere in Multi-City
+        </motion.p>
+
+        {/* BUTTONS */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start"
+          initial="hidden"
+          animate="visible"
           variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 },
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.2,
+              },
+            },
           }}
         >
-          <Link to="#services">View services</Link>
-        </motion.button>
-      </motion.div>
-    </motion.div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          >
+            <Link
+              to="/login"
+              className="inline-block border border-blue-50 text-blue-50 px-6 py-3 rounded-md hover:opacity-90 transition"
+            >
+              Book now
+            </Link>
+          </motion.div>
 
-    {/* Image */}
-    <motion.div
-      className="w-full h-[90vh] lg:w-1/2 flex justify-center"
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <img
-        src="./images/cleaning.jpg"
-        alt="cleaning service"
-        className="lg:max-w-full lg:max-h-full object-cover"
-      />
-    </motion.div>
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
+          >
+         <Link
+  to="#services"
+  className="inline-block bg-white text-black font-medium px-6 py-3 rounded-md transition"
+>
+  View services
+</Link>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* RIGHT IMAGE */}
+      <motion.div
+        className="w-full lg:w-1/2 flex justify-center"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <img
+          src="./images/cleaning.jpg"
+          alt="cleaning service"
+          className="w-full max-w-md lg:max-w-full h-[300px] sm:h-[400px] lg:h-[650px] object-cover rounded-xl"
+        />
+      </motion.div>
+
+    </div>
   </div>
 </section>
     {/* About us */}
